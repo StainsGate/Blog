@@ -8,9 +8,8 @@ from django.contrib.auth.models import User
 
 class Userprofile(models.Model):
     user = models.OneToOneField(User)
-    images = models.ImageField(upload_to= user.username+'_imgaes',blank=True)
-    authority = models.IntegerField(default=0)
-
+    points = models.IntegerField(default=10)
+    imgs = models.ImageField(upload_to='images',blank=True)
 
     def __unicode__(self):
         return self.user.username
@@ -18,19 +17,22 @@ class Userprofile(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=128,unique=True)
-    content = models.CharField(unique=True)
-    author = models.ForeignKey(Userprofile)
+    content = models.TextField()
+    author = models.ForeignKey(User)
     views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
+    comments = models.IntegerField(default=0)
+    imgaes = models.ImageField(upload_to='blog_images',blank=True)
+    date = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.title
 
 class Comment(models.Model):
-    content = models.CharField(max_length=1000,unique=True)
-    date = models.DateField()
+    content = models.CharField(max_length=200,unique=True)
+    date = models.DateTimeField(auto_now=True)
     owner_blog = models.ForeignKey(Blog)
-    publisher = models.CharField(unique=True)
+    publisher = models.CharField(max_length=200,unique=True)
 
 
 

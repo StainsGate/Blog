@@ -11,4 +11,3 @@ class UserForm(forms.ModelForm):
 
 
 
-class UserprofileForm(forms.ModelForm):
