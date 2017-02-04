@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 {% load staticfiles %}
+{% load my_tags %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -69,19 +70,71 @@
      <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-8">
                 {% block body_block %}
 
                 {% endblock %}
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 {% block side_block %}
+                    <!-- Blog Search Well -->
+                    <div class="well">
+                    <h4>Blog Search</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                    </div>
+                    <!-- /.input-group -->
+                    </div>
+
+                    <!-- blog categories well -->
+                    <div class="well well-custom">
+                        <h4>Blog categories</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Economic</a></li>
+                                    <li><a href="#">Science</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="clo-lg-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Carton</a></li>
+                                    <li><a href="#">MapleStory</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end categories well -->
+        <!-- recommend well -->
+        <div class="well well-custom">
+         <h4>Random Commend</h4>
+            <div class="row">
+             {% for blog in blog_list %}
+                <div class="col-lg-12">
+                    <div class="thumbnail">
+                     <img src="/media/{{ blog.imgaes }}" alt="" style="height:180px;width:100%;display: block;">
+                        <div class="caption">
+                            <h5>{{blog.title }}</h5>
+                            <p><a href="/blog/post/{{ blog.id }}">{{ blog.content|short_glance }}</a></p>
+                     </div>
+                    </div>
+                </div>
+                {%  endfor %}
+            </div>
+        </div>
+
                 {%  endblock %}
             </div>
         </div>
 
-
+        <hr>
     <!-- Footer Content -->
         <footer>
             <div class="row">

@@ -1,5 +1,4 @@
 from django import template
-from blog_app.models import Blog
 
 
 register = template.Library()
@@ -7,6 +6,10 @@ register = template.Library()
 @register.filter
 def glance(strings):
     return strings[:60]
+
+@register.filter
+def short_glance(strings):
+    return strings[:20]
 
 
 

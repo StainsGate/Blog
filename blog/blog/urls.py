@@ -15,13 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from blog_app import views
 from django.views.static import serve
 from blog import settings
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index/',views.index,name='index'),
-    url(r'^home/',views.home,name='home'),
+    url(r'blog/',include('blog_app.urls')),
     url(r'^media/(?P<path>.*)',serve,{'document_root':settings.MEDIA_ROOT}),
     url(r'^accounts/',include('registration.backends.simple.urls')),
 ]
