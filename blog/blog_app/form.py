@@ -1,13 +1,16 @@
 from django import forms
-from django.contrib.auth.models import User
-from blog_app.models import Userprofile
+from blog_app.models import Blog,Comment
+from django_summernote.widgets import SummernoteWidget
 
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+
+
+class BlogForm(forms.ModelForm):
+    title = forms.CharField(max_length=30)
+    content = forms.CharField(widget=SummernoteWidget())
+    views = forms.IntegerField(widget=forms.HiddenInput(),initial=0)
+    comments = forms.IntegerField(widget=forms.HiddenInput(),initial=0)
+    likes = forms.IntegerField(widget=forms.HiddenInput(),initial=0)
 
     class Meta:
-        model = User
-        fields = ('username','email','password')
-
-
-
+        model = Blog
+        fields = ('title','content',)

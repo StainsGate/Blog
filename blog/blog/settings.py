@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_summernote',
     'registration',
     'blog_app',
 ]
@@ -128,7 +129,7 @@ USE_TZ = True
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/index/'
+LOGIN_REDIRECT_URL = '/blog/index/'
 LOGIN_URL = '/accounts/login/'
 
 

@@ -5,6 +5,7 @@
 
 
 {% block body_block %}
+    <div class="col-md-8" xmlns="http://www.w3.org/1999/html">
     <h1 class="page-header">
         最新文章
     </h1>
@@ -14,11 +15,12 @@
                     {{ blog.title }} <small>by <a href="#">{{ blog.author }}</a></small>
                    <small>Post on &nbsp<span class="glyphicon glyphicon-time"></span>  {{ blog.date }}</small>
                </h2>
-               <img class="img-responsive" src="/media/{{ blog.imgaes }}"  alt=""
+               <img class="img-responsive" src="/media/{{ blog.show_img }}"  alt=""
                     style="height: 300px;width:100%;display: block;">
                <br>
-               <p>{{ blog.content|glance }}</p>
-               <a class="btn btn-primary " href="/blog/post/{{ blog.id }}">Read More <span class="glyphicon glyphicon-chevron-right"></span>
+               <p>{{ blog.content|get_paragraph|striptags|safe }}</p>
+               <a class="btn btn-primary" href="/blog/post/{{ blog.id }}">Read More
+                   <span class="glyphicon glyphicon-chevron-right"></span>
                </a>
                <hr>
            {% endfor %}
@@ -32,5 +34,7 @@
                         <a href="#">Newer &rarr;</a>
                     </li>
             </ul>
+    </div>
 {% endblock %}
+
 

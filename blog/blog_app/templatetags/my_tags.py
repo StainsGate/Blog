@@ -1,15 +1,14 @@
 from django import template
-
+import re
 
 register = template.Library()
 
-@register.filter
-def glance(strings):
-    return strings[:60]
 
 @register.filter
-def short_glance(strings):
-    return strings[:20]
-
-
-
+def get_paragraph(content):
+    paragraph = re.search(r'<p>.*</p>',content)
+    if paragraph:
+            str = paragraph.group(0)
+            return str
+    else:
+        return '<p>The author is a idiot, he says nothing.</p>'
