@@ -2,7 +2,7 @@ from django.shortcuts import render
 from blog_app.models import Blog,Comment
 from django.http import  HttpResponseRedirect
 from django.contrib.auth import get_user
-from blog_app.form import BlogForm
+from blog_app.form import BlogForm,CommentForm
 import re
 
 # Create your views here.
@@ -15,19 +15,52 @@ def index(request):
 
 def posted(request,blog_id):
     context_dict = {}
+    if request.method == 'POST':
+        try:
+            blog = Blog.objects.get(id=blog_id)
+            context_dict['blog'] = blog
 
-    try:
-        blog = Blog.objects.get(id=blog_id)
-        context_dict['blog'] = blog
+            # new_comment = CommentForm(data=request.POST)
+            # if new_comment.is_valid():
+            #     comment = new_comment.save(commit=False)
+            #     comment.owner_blog = blog
+            #     comment.save()
+            # else:
+            #     print new_comment.errors
 
-        comments = Comment.objects.get(owner_blog_id=blog_id)
-        context_dict['comments'] = comments
+            publisher = request.POST.get('publisher')
+            content = request.POST.get('content')
+            new_comment = Comment()
+            if new_comment:
+                new_comment.publisher = publisher
+                new_comment.content = content
+                new_comment.owner_blog = blog
+                new_comment.save()
+            else:
+                print new_comment.errors
 
-    except Comment.DoesNotExist:
-        pass
+            comments = Comment.objects.filter(owner_blog_id=blog_id)
+            context_dict['comments'] = comments
 
-    finally:
-        return render(request,'blogs/posted.html',context_dict)
+        except Comment.DoesNotExist:
+            pass
+
+        finally:
+            return render(request,'blogs/posted.html',context_dict)
+
+    else:
+        try:
+            blog = Blog.objects.get(id=blog_id)
+            context_dict['blog'] = blog
+
+            comments = Comment.objects.filter(owner_blog_id=blog_id)
+            context_dict['comments'] = comments
+
+        except Comment.DoesNotExist:
+            pass
+
+        finally:
+            return render(request,'blogs/posted.html',context_dict)
 
 def edit_blog(request):
     if request.method == 'POST':

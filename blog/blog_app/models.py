@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Userprofile(models.Model):
     user = models.OneToOneField(User)
     points = models.IntegerField(default=10)
-    Logo = models.ImageField(upload_to='Logos',blank=True)
+    Logo = models.ImageField(upload_to='Logos',blank=True,default='images/logo.png')
 
     def __unicode__(self):
         return self.user.username

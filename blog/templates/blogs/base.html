@@ -37,7 +37,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="">{{ user.username }}</a>
+        <a class="navbar-brand" href="">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="{% static 'images/logo.png' %}">
+                </div>
+                <div class="brand">
+                    {{ user.username }}
+                </div>
+            </div>
+        </a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collaspe-1">
         <ul class="nav navbar-nav navbar-right">
@@ -125,11 +134,11 @@
             <div class="row">
              {% for blog in blog_list %}
                 <div class="col-lg-12">
+                    <div class="caption">
+                        <h5><a href="/blog/post/{{ blog.id }}">{{blog.title }}</a></h5>
+                    </div>
                     <div class="thumbnail">
-                     <img src="/media/{{ blog.show_img }}" alt="" style="height:180px;width:100%;display: block;">
-                        <div class="caption">
-                            <h5><a href="/blog/post/{{ blog.id }}">{{blog.title }}</a></h5>
-                     </div>
+                     <img src="/media/{{ blog.show_img }}" alt=""style="height:180px;width:100%;display: block">
                     </div>
                 </div>
                 {%  endfor %}

@@ -20,7 +20,16 @@
     <h2 class="page-header">Edit you blog here:</h2>
     <form action="/blog/edit_blog/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-         {{ form.as_p }}
+         <div>
+             {{ form.title.errors }}
+             <label for="{{ form.title.id_for_label }}">title:</label>
+             {{ form.title }}
+         </div>
+        <hr>
+        <div>
+            {{ form.content.errors }}
+            {{ form.content }}
+        </div>
     <button class="btn btn-primary" type="submit">Edit Complete</button>
     </form>
     </div>

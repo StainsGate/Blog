@@ -1,5 +1,5 @@
 body{
-    padding-top:70px;
+    padding-top:90px;
 }
 
 footer{
@@ -15,4 +15,24 @@ footer{
 .well-comment{
     margin-top:30px;
     margin-left:0;
+}
+.logo-container .logo {
+    overflow: hidden;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    float: left;
+}
+.logo-container .brand {
+    font-size: 18px;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 60px;
+}
+.container ul>li>a{
+    margin-top: 20px;
+    font-size:15px;
 }
