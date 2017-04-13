@@ -1,3 +1,4 @@
+#coding: utf-8
 from django.shortcuts import render
 from blog_app.models import Blog,Comment
 from django.http import  HttpResponseRedirect
@@ -28,11 +29,15 @@ def posted(request,blog_id):
             # else:
             #     print new_comment.errors
 
-            publisher = request.POST.get('publisher')
+            # publisher = request.POST.get('publisher')
             content = request.POST.get('content')
             new_comment = Comment()
             if new_comment:
-                new_comment.publisher = publisher
+                name = get_user(request).get_username()
+                if name:
+                     new_comment.publisher = name
+                else:
+                    new_comment.publisher = "游客"
                 new_comment.content = content
                 new_comment.owner_blog = blog
                 new_comment.save()
@@ -42,11 +47,11 @@ def posted(request,blog_id):
             comments = Comment.objects.filter(owner_blog_id=blog_id)
             context_dict['comments'] = comments
 
+            return render(request,'blogs/posted.html',context_dict)
+
+
         except Comment.DoesNotExist:
             pass
-
-        finally:
-            return render(request,'blogs/posted.html',context_dict)
 
     else:
         try:

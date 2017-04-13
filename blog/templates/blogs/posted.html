@@ -18,9 +18,11 @@
         <form role="form" action="/blog/post/{{ blog.id }}" method="post">
             {% csrf_token %}
             <div class="form-group">
-               评论人:<input class="form-control" rows="1" name="publisher"
-                          type="text" maxlength="20" style="max-width: 200px;">
-                <br>
+               {% if user.is_authenticated %}
+                   评论人:{{ user.username }}
+               {% else %}
+                   评论人:游客
+               {% endif %}
                 <textarea class="form-control" rows="5" name="content"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

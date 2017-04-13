@@ -32,7 +32,7 @@ class Comment(models.Model):
     content = models.TextField(unique=True)
     date = models.DateTimeField(auto_now=True)
     owner_blog = models.ForeignKey(Blog)
-    publisher = models.CharField(max_length=200,unique=True)
+    publisher = models.CharField(max_length=200)
 
 
 

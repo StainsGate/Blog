@@ -17,10 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.static import serve
 from blog import settings
+from blog_app import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'blog/',include('blog_app.urls')),
+    url(r'home/',views.home,name='home'),
     url(r'^media/(?P<path>.*)',serve,{'document_root':settings.MEDIA_ROOT}),
     url(r'^summernote/',include('django_summernote.urls')),
     url(r'^accounts/',include('registration.backends.simple.urls')),
